@@ -5,7 +5,7 @@
   }
   
   .clocks-container {
-    display: flex;
+    display: none;
     justify-content: space-between;
     margin-top: 50px;
   }
@@ -31,5 +31,9 @@
   .clock-time {
     font-size: 48px;
     font-weight: bold;
+  }
+  
+  .hidden {
+    display: none;
   }
   
