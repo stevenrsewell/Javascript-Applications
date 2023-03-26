@@ -1,15 +1,20 @@
 function showTime() {
-    const date = new Date();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
+    const timezone = document.getElementById("timezone").value;
+    const date = new Date().toLocaleString("en-US", {timeZone: timezone});
+    const time = new Date(date);
 
-    hours = hours < 10 ? "0" + hours : hours;
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+    let seconds = time.getSeconds();
+
+    const amPm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12;
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    const time = `${hours}:${minutes}:${seconds}`;
-    document.getElementById("clock").innerText = time;
+    const formattedTime = `${hours}:${minutes}:${seconds} ${amPm}`;
+    document.getElementById("clock").innerText = formattedTime;
 }
 
-setInterval(showTime, 1000);
+showTime();
