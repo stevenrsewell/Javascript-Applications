@@ -2,15 +2,25 @@
 <html>
   <head>
     <title>To-Do List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>To-Do List</h1>
-    <form id="todo-form">
-      <input type="text" id="todo-input" placeholder="Enter a new to-do">
-      <button type="submit">Add</button>
-    </form>
-    <ul id="todo-list"></ul>
+    <div class="container mt-4">
+      <h1>To-Do List</h1>
+      <form id="todo-form">
+        <div class="form-group">
+          <label for="todo-input">New to-do:</label>
+          <input type="text" class="form-control" id="todo-input" placeholder="Enter a new to-do">
+        </div>
+        <div class="form-group">
+          <label for="category-input">Category:</label>
+          <input type="text" class="form-control" id="category-input" placeholder="Enter a category">
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+      <ul id="todo-list" class="mt-4"></ul>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
