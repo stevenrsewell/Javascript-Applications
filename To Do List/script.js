@@ -10,27 +10,34 @@ form.addEventListener('submit', (e) => {
   if (todoText !== '' && categoryText !== '') {
     const todoItem = document.createElement('li');
     todoItem.classList.add('list-group-item');
-    todoItem.innerHTML = `
-      <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <span class="mr-2">${todoText}</span>
-          <span class="badge badge-primary badge-pill">${categoryText}</span>
-        </div>
-        <button type="button" class="close" aria-label="Remove">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    `;
+    const todoContent = document.createElement('div');
+    const todoSpan = document.createElement('span');
+    todoSpan.textContent = todoText;
+    const categorySpan = document.createElement('span');
+    categorySpan.textContent = categoryText;
+    categorySpan.classList.add('category'); // Adding class for category styling
+    const closeButton = document.createElement('button');
+    closeButton.setAttribute('type', 'button');
+    closeButton.classList.add('close');
+    closeButton.setAttribute('aria-label', 'Remove');
+    closeButton.innerHTML = '<span aria-hidden="true">&times;</span>';
+
+    todoContent.appendChild(todoSpan);
+    todoContent.appendChild(categorySpan);
+    todoContent.appendChild(closeButton);
+    todoItem.appendChild(todoContent);
     list.appendChild(todoItem);
+
     input.value = '';
     categoryInput.value = '';
   }
 });
 
 list.addEventListener('click', (e) => {
-  if (e.target.classList.contains('close')) {
-    e.target.parentElement.parentElement.remove();
-  } else if (e.target.tagName === 'SPAN' && !e.target.classList.contains('badge')) {
-    e.target.classList.toggle('completed');
+  const target = e.target;
+  if (target.tagName === 'SPAN' && !target.classList.contains('category')) {
+    target.classList.toggle('completed');
+  } else if (target.classList.contains('close')) {
+    target.parentElement.parentElement.remove();
   }
 });
