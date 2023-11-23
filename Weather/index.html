@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Weather Forecast</h1>
+    <input type="text" id="zipCodeInput" placeholder="Enter ZIP code">
+    <button onclick="getWeather()">Get Weather</button>
+    <div id="weather"></div>
+    <button onclick="switchToCelsius()">Celsius</button>
+    <button onclick="switchToFahrenheit()">Fahrenheit</button>
+
+  <script>
+    
+let isCelsius = true;
+
+function getWeather() {
+  const apiKey = '6000229ba681c93b80335817e159fb87';
+  const zipCode = document.getElementById('zipCodeInput').value;
+
+  if (zipCode.trim() === '') {
+    alert('Please enter a ZIP code');
+    return;
+  }
+
+  fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=${apiKey}&units=${isCelsius ? 'metric' : 'imperial'}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+      return response.json();
+    })
+    .then(data => {
+      displayWeather(data);
+    })
+    .catch(error => {
+      console.error('There was a problem fetching the weather data:', error);
+      alert('There was a problem fetching the weather data. Please try again.');
+    });
+}
+
+function displayWeather(data) {
+  const weatherDiv = document.getElementById('weather');
+  weatherDiv.innerHTML = '';
+
+  const cityName = document.createElement('h2');
+  cityName.textContent = data.name;
+
+  const temperature = document.createElement('p');
+  temperature.textContent = `Temperature: ${data.main.temp} ${isCelsius ? '°C' : '°F'}`;
+
+  const weatherDescription = document.createElement('p');
+  weatherDescription.textContent = `Weather: ${data.weather[0].main}`;
+
+  weatherDiv.appendChild(cityName);
+  weatherDiv.appendChild(temperature);
+  weatherDiv.appendChild(weatherDescription);
+}
+
+function switchToCelsius() {
+  if (!isCelsius) {
+    isCelsius = true;
+    getWeather();
+  }
+}
+
+function switchToFahrenheit() {
+  if (isCelsius) {
+    isCelsius = false;
+    getWeather();
+  }
+}
+
+  </script>
+</body>
+</html>
