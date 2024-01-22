@@ -1,3 +1,8 @@
+# Javascript Applications
+[https://stevenrsewell.github.io/Javascript-Applications/](https://stevenrsewell.github.io/Javascript-Applications/)
+
+A collection of interactive web applications including a To-Do List, Digital Clock, and Calculator developed using HTML, CSS, and JavaScript.
+
 ## Weather App
 This code is a weather app written in HTML, CSS, and JavaScript. It allows users to input a ZIP code, it will retrieve weather data from the OpenWeatherMap API, and then display the current temperature and weather description for that location. Additionally, it provides buttons to switch between displaying the temperature in Celsius and Fahrenheit.
 
